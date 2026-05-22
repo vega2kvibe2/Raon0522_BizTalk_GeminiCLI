@@ -84,11 +84,13 @@ AI도 사람도 "끝"의 기준이 명확해야 헤매지 않습니다. 기준 �
 ### 백엔드
 
 - [ ] FastAPI 서버가 로컬에서 정상 실행된다 (`uvicorn main:app`)
+- [ ] Health Check 기능이 존재해야 한다
 - [ ] `POST /api/convert` 엔드포인트가 존재한다
-- [ ] Upstage Solar-Pro2 API 호출이 정상 작동한다
+- [ ] Upstage Solar-Pro API 호출이 정상 작동한다
 - [ ] 수신 대상(4종)에 따라 다른 프롬프트가 적용된다
 - [ ] CORS 설정이 되어 있어 프론트엔드에서 호출 가능하다
 - [ ] `.env` 파일로 API 키를 관리하고, `.gitignore`에 등록되어 있다
+- [ ] FastAPI 서버에 Staic Page(`index.html`) 라우팅 기능이 있어야 한다 
 
 ### 프론트엔드
 
@@ -102,6 +104,7 @@ AI도 사람도 "끝"의 기준이 명확해야 헤매지 않습니다. 기준 �
 ### 배포
 
 - [ ] GitHub 레포지토리에 코드가 올라가 있다
+- [ ] Vercel 에 프론트엔드와 백엔드 같이 배포한다
 - [ ] Vercel에서 프론트엔드가 정상 접속된다
 - [ ] 배포된 URL에서 실제 변환이 작동한다
 
@@ -113,11 +116,11 @@ AI도 사람도 "끝"의 기준이 명확해야 헤매지 않습니다. 기준 �
 |------|------|------|
 | 프론트엔드 | HTML5 / CSS3 / JavaScript (ES6+) | 프레임워크 없음 |
 | 백엔드 | Python 3.11+ / FastAPI / Uvicorn | |
-| AI 연동 | LangChain / langchain-upstage | |
-| AI 모델 | Upstage Solar-Pro2 | |
+| AI 연동 | 최신 LangChain / langchain-upstage | |
+| AI 모델 | 최신 Upstage Solar-Pro | |
 | 환경 변수 | python-dotenv | `.env` 파일 관리 |
 | 버전 관리 | Git / GitHub | |
-| 배포 | Vercel | 프론트엔드 정적 배포 |
+| 배포 | Vercel | 프론트엔드와 백엔드 배포 |
 
 ### 사전 준비
 
@@ -151,7 +154,7 @@ UPSTAGE_API_KEY=your_api_key_here
 |----|------|------|
 | F-01 | 텍스트 입력 | 사용자가 변환할 원문을 자유롭게 입력 |
 | F-02 | 수신 대상 선택 | 상사 / 타팀 동료 / 고객 / 팀 내 동료 중 선택 |
-| F-03 | 말투 변환 처리 | FastAPI → LangChain → Solar-Pro2 호출 |
+| F-03 | 말투 변환 처리 | FastAPI → LangChain → Solar-Pro 호출 |
 | F-04 | 결과 출력 | 변환된 텍스트를 화면에 표시 |
 | F-05 | 로딩 표시 | API 호출 중 처리 중 상태 표시 |
 | F-06 | 결과 복사 | 변환 결과를 클립보드에 복사 |
@@ -197,20 +200,18 @@ PROMPTS = {
 ## 6. 디렉토리 구조
 
 ```
-biztone-converter/
+biztalk-gemini-cli/
 │
 ├── backend/
 │   ├── main.py                 # FastAPI 앱 + CORS 설정
 │   ├── routers/
 │   │   └── convert.py          # /api/convert 라우터
 │   ├── services/
-│   │   └── tone_converter.py   # LangChain + Solar-Pro2 연동
+│   │   └── tone_converter.py   # LangChain + Solar-Pro 연동
 │   ├── prompts/
 │   │   └── templates.py        # 대상별 프롬프트 템플릿
 │   ├── models/
 │   │   └── schemas.py          # Pydantic 요청/응답 스키마
-│   ├── .env                    # API 키 (git 제외)
-│   ├── .env.example            # 환경 변수 샘플 (git 포함)
 │   └── requirements.txt
 │
 ├── frontend/
@@ -221,6 +222,7 @@ biztone-converter/
 │       └── app.js
 │
 ├── .gitignore
+├── .env                        # API 키 (git 제외)
 └── README.md
 ```
 
@@ -283,11 +285,10 @@ Content-Type: application/json
 
 ### STEP 1. 환경 준비 (30분)
 
-1. GitHub 레포지토리 생성 (`biztone-converter`)
+1. GitHub 레포지토리 생성 (`Raon0522_BizTalk_GeminiCLI`)
 2. 디렉토리 구조 생성
-3. `.gitignore` 작성 — `.env` 반드시 포함
-4. Upstage API 키 발급 및 `.env` 파일 작성
-5. `requirements.txt` 작성 및 패키지 설치
+3. `requirements.txt` 작성하고 라이브러리의 버전(use context7)을 명시해야 함
+4. 가상환경(`venv`) 폴더를 생성하고 `requirements.txt` 명시된 의존성을 설치한다 
 
 ---
 
