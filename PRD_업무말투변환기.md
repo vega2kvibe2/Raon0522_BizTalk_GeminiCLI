@@ -89,7 +89,7 @@ AI도 사람도 "끝"의 기준이 명확해야 헤매지 않습니다. 기준 �
 - [ ] Upstage Solar-Pro API 호출이 정상 작동한다
 - [ ] 수신 대상(4종)에 따라 다른 프롬프트가 적용된다
 - [ ] CORS 설정이 되어 있어 프론트엔드에서 호출 가능하다
-- [ ] `.env` 파일로 API 키를 관리하고, `.gitignore`에 등록되어 있다
+- [x] `.env` 파일로 API 키를 관리하고, `.gitignore`에 등록되어 있다
 - [ ] FastAPI 서버에 Staic Page(`index.html`) 라우팅 기능이 있어야 한다 
 
 ### 프론트엔드
@@ -103,7 +103,7 @@ AI도 사람도 "끝"의 기준이 명확해야 헤매지 않습니다. 기준 �
 
 ### 배포
 
-- [ ] GitHub 레포지토리에 코드가 올라가 있다
+- [x] GitHub 레포지토리에 코드가 올라가 있다
 - [ ] Vercel 에 프론트엔드와 백엔드 같이 배포한다
 - [ ] Vercel에서 프론트엔드가 정상 접속된다
 - [ ] 배포된 URL에서 실제 변환이 작동한다
@@ -285,16 +285,17 @@ Content-Type: application/json
 
 ### STEP 1. 환경 준비 (30분)
 
-1. GitHub 레포지토리 생성 (`Raon0522_BizTalk_GeminiCLI`)
-2. 디렉토리 구조 생성
-3. `requirements.txt` 작성하고 라이브러리의 버전(use context7)을 명시해야 함
-4. 가상환경(`venv`) 폴더를 생성하고 `requirements.txt` 명시된 의존성을 설치한다 
+1. [x] GitHub 레포지토리 생성 (`Raon0522_BizTalk_GeminiCLI`)
+2. [x] 디렉토리 구조 생성
+3. [x] `requirements.txt` 작성하고 라이브러리의 버전(use context7)을 명시해야 함
+4. [x] 가상환경(`venv`) 폴더를 생성하고 `requirements.txt` 명시된 의존성을 설치한다 
 
 ---
 
 ### STEP 2. 백엔드 구현 (90분)
 
-> 원칙 2 적용: 구현 전 Solar-Pro2 연동 방식을 먼저 확인하세요.
+> 원칙 2 적용: 구현 전 최신 Solar-Pro 모델과의 연동 방식을 먼저 확인하세요. (use context7)
+- Upstage 공식 문서를 통해서도 최신 Solar-Pro 모델과의 연동 방식을 확인하세요
 
 **구현 순서**
 
@@ -303,6 +304,7 @@ Content-Type: application/json
 3. `tone_converter.py` — 핵심 변환 로직 구현(LangChain + Solar-Pro2 연동)
 4. `convert.py` — API 라우터 구현
 5. `main.py` — 메인 앱 설정(FastAPI 앱 + CORS 설정)
+ * Health check 기능, 정적인 페이지 라우팅 기능도 추가해야 함 
 6. 로컬 서버 실행 및 테스트 (`uvicorn main:app --reload`)
 
 **핵심 코드 구조 참고**
@@ -465,12 +467,12 @@ node_modules/
 ### requirements.txt
 
 ```
-fastapi
-uvicorn
-langchain
-langchain-upstage
-python-dotenv
-pydantic
+fastapi>=0.136.1
+uvicorn>=0.47.0
+langchain>=1.3.1
+langchain-upstage>=0.7.7
+python-dotenv>=1.2.2
+pydantic>=2.13.4,<3.0.0
 ```
 
 ### 로컬 실행 명령어
