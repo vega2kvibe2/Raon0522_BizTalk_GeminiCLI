@@ -306,6 +306,8 @@ Content-Type: application/json
 5. `main.py` — 메인 앱 설정(FastAPI 앱 + CORS 설정)
  * Health check 기능, 정적인 페이지 라우팅 기능도 추가해야 함 
 6. 로컬 서버 실행 및 테스트 (`uvicorn main:app --reload`)
+ * @Playwright MCP를 사용하여 Swagger docs 페이지를 테스트 하기 
+    * Health check 기능과 핵심 변환 기능을 테스트 하기
 
 **핵심 코드 구조 참고**
 
